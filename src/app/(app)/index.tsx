@@ -24,6 +24,7 @@ export default function Feed() {
     <View className="flex-1 ">
       <FocusAwareStatusBar />
       <FlashList
+        numColumns={2}
         data={data}
         renderItem={renderItem}
         keyExtractor={(_, index) => `item-${index}`}

@@ -1,3 +1,4 @@
+import { Rating } from '@kolking/react-native-rating';
 import { Link } from 'expo-router';
 import React from 'react';
 
@@ -14,11 +15,11 @@ const images = [
   'https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?auto=format&fit=crop&w=800&q=80',
 ];
 
-export const Card = ({ title, body, id }: Props) => {
+export const Card = ({ title, id }: Props) => {
   return (
     <Link href={`/feed/${id}`} asChild>
       <Pressable>
-        <View className="m-2 overflow-hidden rounded-xl  border border-neutral-300 bg-white  dark:bg-neutral-900">
+        <View className="m-2 overflow-hidden rounded-xl border border-neutral-300 bg-white  dark:bg-neutral-900">
           <Image
             className="h-56 w-full overflow-hidden rounded-t-xl"
             contentFit="cover"
@@ -29,9 +30,8 @@ export const Card = ({ title, body, id }: Props) => {
 
           <View className="p-2">
             <Text className="py-3 text-2xl ">{title}</Text>
-            <Text numberOfLines={3} className="leading-snug text-gray-600">
-              {body}
-            </Text>
+            <Text className="py-3 text-2xl ">$10.000</Text>
+            <Rating size={20} rating={3} />
           </View>
         </View>
       </Pressable>
