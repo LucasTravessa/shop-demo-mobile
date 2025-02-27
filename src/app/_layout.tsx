@@ -34,10 +34,15 @@ SplashScreen.setOptions({
 export default function RootLayout() {
   return (
     <Providers>
-      <Stack>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          title: 'My demo app',
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+      >
+        <Stack.Screen name="(app)" />
+        <Stack.Screen name="onboarding" />
+        <Stack.Screen name="login" />
       </Stack>
     </Providers>
   );
