@@ -1,0 +1,5 @@
+
+echo ">> Linting your files and fixing them if needed..."
+
+pnpm type-check
+pnpm lint-staged
