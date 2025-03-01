@@ -7,7 +7,6 @@
     "eamodio.gitlens",
     "formulahendry.auto-close-tag",
     "formulahendry.auto-rename-tag",
-    "bradlc.vscode-tailwindcss",
-    "ChakrounAnas.turbo-console-log"
+    "bradlc.vscode-tailwindcss"
   ]
 }
