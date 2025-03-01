@@ -7,11 +7,10 @@ import {
   Settings as SettingsIcon,
   Style as StyleIcon,
 } from '@/components/ui/icons';
-import { useAuth, useIsFirstTime } from '@/lib';
+import { useAuth } from '@/lib';
 
 export default function TabLayout() {
   const status = useAuth.use.status();
-  const [isFirstTime] = useIsFirstTime();
   const hideSplash = useCallback(async () => {
     await SplashScreen.hideAsync();
   }, []);
@@ -23,9 +22,6 @@ export default function TabLayout() {
     }
   }, [hideSplash, status]);
 
-  if (isFirstTime) {
-    return <Redirect href="/onboarding" />;
-  }
   if (status === 'signOut') {
     return <Redirect href="/login" />;
   }
@@ -53,6 +49,17 @@ export default function TabLayout() {
           tabBarButtonTestID: 'style-tab',
         }}
       />
+
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: 'Cart',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <StyleIcon color={color} />,
+          tabBarButtonTestID: 'cart-tab',
+        }}
+      />
+
       <Tabs.Screen
         name="settings"
         options={{
@@ -64,13 +71,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-
-// const CreateNewPostLink = () => {
-//   return (
-//     <Link href="/feed/add-post" asChild>
-//       <Pressable>
-//         <Text className="px-3 text-primary-300">Create</Text>
-//       </Pressable>
-//     </Link>
-//   );
-// };

@@ -41,7 +41,6 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(app)" />
-        <Stack.Screen name="onboarding" />
         <Stack.Screen name="login" />
       </Stack>
     </Providers>
