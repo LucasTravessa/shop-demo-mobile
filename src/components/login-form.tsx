@@ -8,7 +8,6 @@ import * as z from 'zod';
 import { Button, ControlledInput, Text, View } from '@/components/ui';
 
 const schema = z.object({
-  name: z.string().optional(),
   email: z
     .string({
       required_error: 'Email is required',
@@ -37,47 +36,47 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
       behavior="padding"
       keyboardVerticalOffset={10}
     >
-      <View className="flex-1 justify-center p-4">
-        <View className="items-center justify-center">
-          <Text
-            testID="form-title"
-            className="pb-6 text-center text-4xl font-bold"
-          >
-            Sign In
+      <View className="flex-1 justify-around p-4">
+        <View className="justify-center">
+          <Text testID="form-title" className="pb-6 text-4xl font-bold">
+            Login
           </Text>
 
-          <Text className="mb-6 max-w-xs text-center text-gray-500">
-            Welcome! 👋 This is a demo login screen! Feel free to use any email
-            and password to sign in and try it out.
+          <Text className="mb-6 text-lg font-light">
+            Selecione um nome de usuário e uma senha na lista abaixo ou clique
+            no nome de usuário para preencher automaticamente o nome de usuário
+            e a senha.
           </Text>
         </View>
 
-        <ControlledInput
-          testID="name"
-          control={control}
-          name="name"
-          label="Name"
-        />
+        <View>
+          <ControlledInput
+            testID="email-input"
+            control={control}
+            name="email"
+            label="Nome Completo"
+          />
+          <ControlledInput
+            testID="password-input"
+            control={control}
+            name="password"
+            label="Senha"
+            placeholder="***"
+            secureTextEntry={true}
+          />
+          <Button
+            testID="login-button"
+            label="Login"
+            onPress={handleSubmit(onSubmit)}
+          />
+        </View>
 
-        <ControlledInput
-          testID="email-input"
-          control={control}
-          name="email"
-          label="Email"
-        />
-        <ControlledInput
-          testID="password-input"
-          control={control}
-          name="password"
-          label="Password"
-          placeholder="***"
-          secureTextEntry={true}
-        />
-        <Button
-          testID="login-button"
-          label="Login"
-          onPress={handleSubmit(onSubmit)}
-        />
+        <View className="mt-4 justify-center rounded-md border border-gray-200 bg-gray-100 p-2">
+          <Text className="font-bold">Nomes de usuário aceitos:</Text>
+          <Text className="">dev.zap@yopmail.com</Text>
+          <Text className="font-bold">Senha para todos os usuários:</Text>
+          <Text className="">12345678</Text>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
