@@ -1,9 +1,11 @@
 import { FlashList } from '@shopify/flash-list';
 import React from 'react';
+import { Pressable } from 'react-native-gesture-handler';
 
 import { type Product, useProducts } from '@/api/products';
 import { Card } from '@/components/card';
 import { EmptyList, FocusAwareStatusBar, Text, View } from '@/components/ui';
+import Filter from '@/components/ui/icons/filter';
 
 export default function Feed() {
   const { data, isPending, isError } = useProducts();
@@ -23,6 +25,16 @@ export default function Feed() {
   return (
     <View className="flex-1 ">
       <FocusAwareStatusBar />
+      <View className="flex-row items-center justify-between p-4">
+        <Text className="text-3xl font-bold">Produtos</Text>
+        <Pressable
+          onPress={() => {
+            console.log('Filter Pressed');
+          }}
+        >
+          <Filter className="size-24" />
+        </Pressable>
+      </View>
       <FlashList
         numColumns={2}
         data={data}
