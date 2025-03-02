@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import type { PressableProps, View } from 'react-native';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
@@ -6,7 +7,8 @@ import { tv } from 'tailwind-variants';
 
 const button = tv({
   slots: {
-    container: 'my-2 flex flex-row items-center justify-center rounded-md px-4',
+    container:
+      'my-2 flex flex-row items-center justify-center rounded-full px-4',
     label: 'font-inter text-base font-semibold',
     indicator: 'h-6 text-white',
   },
@@ -14,9 +16,9 @@ const button = tv({
   variants: {
     variant: {
       default: {
-        container: 'bg-black dark:bg-white',
-        label: 'text-white dark:text-black',
-        indicator: 'text-white dark:text-black',
+        container: '',
+        label: 'text-lg font-semibold text-black',
+        indicator: 'text-black',
       },
       secondary: {
         container: 'bg-primary-600',
@@ -113,34 +115,41 @@ export const Button = React.forwardRef<View, Props>(
     );
 
     return (
-      <Pressable
-        disabled={disabled || loading}
-        className={styles.container({ className })}
-        {...props}
-        ref={ref}
-        testID={testID}
+      <LinearGradient
+        colors={['#6AC9FF', '#28CE9C']}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0 }}
+        style={{ borderRadius: 999 }}
       >
-        {props.children ? (
-          props.children
-        ) : (
-          <>
-            {loading ? (
-              <ActivityIndicator
-                size="small"
-                className={styles.indicator()}
-                testID={testID ? `${testID}-activity-indicator` : undefined}
-              />
-            ) : (
-              <Text
-                testID={testID ? `${testID}-label` : undefined}
-                className={styles.label({ className: textClassName })}
-              >
-                {text}
-              </Text>
-            )}
-          </>
-        )}
-      </Pressable>
+        <Pressable
+          disabled={disabled || loading}
+          className={styles.container({ className })}
+          {...props}
+          ref={ref}
+          testID={testID}
+        >
+          {props.children ? (
+            props.children
+          ) : (
+            <>
+              {loading ? (
+                <ActivityIndicator
+                  size="small"
+                  className={styles.indicator()}
+                  testID={testID ? `${testID}-activity-indicator` : undefined}
+                />
+              ) : (
+                <Text
+                  testID={testID ? `${testID}-label` : undefined}
+                  className={styles.label({ className: textClassName })}
+                >
+                  {text}
+                </Text>
+              )}
+            </>
+          )}
+        </Pressable>
+      </LinearGradient>
     );
   }
 );
