@@ -1,0 +1,74 @@
+import { useRouter } from 'expo-router';
+import React, { useMemo } from 'react';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import { CartCard } from '@/components/cart-card';
+import { Button, Text } from '@/components/ui';
+import { useCartStore } from '@/lib/hooks/use-cart';
+
+export default function Cart() {
+  const router = useRouter();
+  const store = useCartStore();
+  const total = useMemo(() => {
+    if (store.cart.length === 0) return 0;
+    return store.cart.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    );
+  }, [store.cart]);
+
+  if (store.cart.length === 0) {
+    return (
+      <View>
+        <Text>Your cart is empty</Text>
+      </View>
+    );
+  }
+
+  const handleCheckout = () => {
+    router.push('/checkout');
+  };
+
+  return (
+    <View className="flex-1 justify-between px-5 py-3">
+      <View>
+        <Text className="mb-6 text-3xl font-bold">My Cart</Text>
+        <ScrollView showsVerticalScrollIndicator={false} className="h-3/4">
+          <View className="gap-5">
+            {store.cart.map((item, index) => (
+              <CartCard
+                key={index}
+                product={item.product}
+                quantity={item.quantity}
+                removeItem={() => store.removeFromCart(item.product.id)}
+                quantityAdd={() =>
+                  store.updateCartItemQuantity(
+                    item.product.id,
+                    item.quantity + 1
+                  )
+                }
+                quantitySub={() =>
+                  store.updateCartItemQuantity(
+                    item.product.id,
+                    item.quantity - 1
+                  )
+                }
+              />
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+      <View className="gap-5">
+        <View className="flex flex-row justify-between">
+          <Text className="text-xl font-semibold">
+            Total: <Text className="text-lg ">{store.cart.length} itens</Text>{' '}
+          </Text>
+          <Text className="text-xl font-bold">R$ {total.toFixed(2)}</Text>
+        </View>
+
+        <Button label="Ir para Checkout" onPress={handleCheckout} />
+      </View>
+    </View>
+  );
+}

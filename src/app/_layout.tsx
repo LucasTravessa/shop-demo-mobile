@@ -42,6 +42,7 @@ export default function RootLayout() {
       >
         <Stack.Screen name="(app)" />
         <Stack.Screen name="login" />
+        <Stack.Screen name="checkout" />
       </Stack>
     </Providers>
   );
