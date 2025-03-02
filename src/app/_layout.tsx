@@ -3,15 +3,19 @@ import '../../global.css';
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  GestureHandlerRootView,
+  Pressable,
+} from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 import { APIProvider } from '@/api';
+import ArrowLeft from '@/components/ui/icons/arrow-left';
 import { hydrateAuth, loadSelectedTheme } from '@/lib';
 import { useThemeConfig } from '@/lib/use-theme-config';
 
@@ -32,17 +36,25 @@ SplashScreen.setOptions({
 });
 
 export default function RootLayout() {
+  const router = useRouter();
+
   return (
     <Providers>
       <Stack
         screenOptions={{
           title: 'My demo app',
-          headerBackButtonDisplayMode: 'minimal',
+          headerLeft: (props) =>
+            props.canGoBack && (
+              <Pressable onPress={() => router.back()}>
+                <ArrowLeft />
+              </Pressable>
+            ),
         }}
       >
         <Stack.Screen name="(app)" />
         <Stack.Screen name="login" />
         <Stack.Screen name="checkout" />
+        <Stack.Screen name="details/[id]" />
       </Stack>
     </Providers>
   );
