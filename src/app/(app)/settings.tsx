@@ -1,79 +1,40 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Env } from '@env';
-import { useColorScheme } from 'nativewind';
 
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
-import { ThemeItem } from '@/components/settings/theme-item';
-import {
-  colors,
-  FocusAwareStatusBar,
-  ScrollView,
-  Text,
-  View,
-} from '@/components/ui';
-import { Github, Rate, Share, Support, Website } from '@/components/ui/icons';
+import { FocusAwareStatusBar, ScrollView, View } from '@/components/ui';
 import { useAuth } from '@/lib';
 
 export default function Settings() {
   const signOut = useAuth.use.signOut();
-  const { colorScheme } = useColorScheme();
-  const iconColor =
-    colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
   return (
     <>
       <FocusAwareStatusBar />
 
       <ScrollView>
         <View className="flex-1 px-4 pt-16 ">
-          <Text className="text-xl font-bold">Settings </Text>
-          <ItemsContainer title="settings.generale">
-            <ThemeItem />
+          <ItemsContainer title="TEST FLOWS">
+            <Item text="Adicionar ao fluxo do carrinho" onPress={() => {}} />
+            <Item text="Checkout Flow" onPress={() => {}} />
+            <Item text="Log In Flow" onPress={() => {}} />
+            <Item text="QR Code Scanner" onPress={() => {}} />
+            <Item text="Desenho" onPress={() => {}} />
           </ItemsContainer>
 
-          <ItemsContainer title="settings.about">
-            <Item text="settings.app_name" value={Env.NAME} />
-            <Item text="settings.version" value={Env.VERSION} />
-          </ItemsContainer>
-
-          <ItemsContainer title="settings.support_us">
-            <Item
-              text="settings.share"
-              icon={<Share color={iconColor} />}
-              onPress={() => {}}
-            />
-            <Item
-              text="settings.rate"
-              icon={<Rate color={iconColor} />}
-              onPress={() => {}}
-            />
-            <Item
-              text="settings.support"
-              icon={<Support color={iconColor} />}
-              onPress={() => {}}
-            />
-          </ItemsContainer>
-
-          <ItemsContainer title="settings.links">
-            <Item text="settings.privacy" onPress={() => {}} />
-            <Item text="settings.terms" onPress={() => {}} />
-            <Item
-              text="settings.github"
-              icon={<Github color={iconColor} />}
-              onPress={() => {}}
-            />
-            <Item
-              text="settings.website"
-              icon={<Website color={iconColor} />}
-              onPress={() => {}}
-            />
-          </ItemsContainer>
-
-          <View className="my-8">
+          <ItemsContainer title="ACTIONS">
             <ItemsContainer>
-              <Item text="settings.logout" onPress={signOut} />
+              <Item text="Log out" onPress={signOut} />
+              <Item text="Reset App State" onPress={() => {}} />
             </ItemsContainer>
-          </View>
+          </ItemsContainer>
+
+          <ItemsContainer title="OTHER">
+            <ItemsContainer>
+              <Item text="API Calls" onPress={() => {}} />
+              <Item text="Report A Bug" onPress={() => {}} />
+              <Item text="About" onPress={() => {}} />
+            </ItemsContainer>
+          </ItemsContainer>
         </View>
       </ScrollView>
     </>
