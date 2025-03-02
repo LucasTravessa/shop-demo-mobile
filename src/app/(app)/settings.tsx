@@ -1,5 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 
+import { useRouter } from 'expo-router';
+
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
 import { FocusAwareStatusBar, ScrollView, View } from '@/components/ui';
@@ -7,6 +9,7 @@ import { useAuth } from '@/lib';
 
 export default function Settings() {
   const signOut = useAuth.use.signOut();
+  const router = useRouter();
   return (
     <>
       <FocusAwareStatusBar />
@@ -16,7 +19,12 @@ export default function Settings() {
           <ItemsContainer title="TEST FLOWS">
             <Item text="Adicionar ao fluxo do carrinho" onPress={() => {}} />
             <Item text="Checkout Flow" onPress={() => {}} />
-            <Item text="Log In Flow" onPress={() => {}} />
+            <Item
+              text="Log In Flow"
+              onPress={() => {
+                router.push('/login');
+              }}
+            />
             <Item text="QR Code Scanner" onPress={() => {}} />
             <Item text="Desenho" onPress={() => {}} />
           </ItemsContainer>
