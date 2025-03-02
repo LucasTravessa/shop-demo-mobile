@@ -12,7 +12,7 @@ type Props = {
 };
 
 function ColorCircle({ color }: { color: string }) {
-  return <View className={'size-8 rounded-full' + ` bg-${color}`} />;
+  return <View className={'size-7 rounded-full' + ` bg-${color}`} />;
 }
 
 export default function ColorPicker({ selectedColor }: Props) {
@@ -21,7 +21,7 @@ export default function ColorPicker({ selectedColor }: Props) {
     !!selectedColor && Object.keys(colors).includes(selectedColor);
   return (
     <View className="flex w-full flex-row items-center">
-      <Text>Cor: </Text>
+      <Text className="text-lg">Cor: </Text>
       <View className="flex flex-row justify-between gap-2">
         {isSelectedColor ? (
           <ColorCircle color={colors[selectedColor as keyof typeof colors]} />
