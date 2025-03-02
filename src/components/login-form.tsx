@@ -75,7 +75,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
           <Text className="font-bold">Nomes de usuário aceitos:</Text>
           <Text className="">dev.zap@yopmail.com</Text>
           <Text className="font-bold">Senha para todos os usuários:</Text>
-          <Text className="">12345678</Text>
+          <Text className="">testPassword</Text>
         </View>
       </View>
     </KeyboardAvoidingView>
