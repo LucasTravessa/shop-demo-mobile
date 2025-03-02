@@ -163,7 +163,7 @@ function Step2({
         className="mb-6"
       />
       <Button
-        label="Confirm Payment"
+        label="COMPRAR AGORA"
         onPress={handleSubmit}
         testID="confirm-payment-button"
       />
