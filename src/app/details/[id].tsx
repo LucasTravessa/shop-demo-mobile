@@ -55,7 +55,6 @@ export default function Details() {
 
   return (
     <View className="flex-1 p-3 ">
-      <Stack.Screen />
       <FocusAwareStatusBar />
       <View>
         <View className="my-2">
