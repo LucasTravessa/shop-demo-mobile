@@ -1,4 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { cssInterop } from 'nativewind';
 import React from 'react';
 import type { PressableProps, View } from 'react-native';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
@@ -114,12 +115,18 @@ export const Button = React.forwardRef<View, Props>(
       [variant, disabled, size]
     );
 
+    cssInterop(LinearGradient, {
+      className: {
+        target: 'style',
+      },
+    });
+
     return (
       <LinearGradient
         colors={['#6AC9FF', '#28CE9C']}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
-        style={{ borderRadius: 999, paddingVertical: 2 }}
+        className={styles.container({ className })}
       >
         <Pressable
           disabled={disabled || loading}
