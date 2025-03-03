@@ -26,7 +26,7 @@ const schema = z.object({
 
 type FormType = z.infer<typeof schema>;
 
-export default function Checkout() {
+export default function Review() {
   const [step, setStep] = React.useState<number>(1);
 
   const onContinue = () => {
