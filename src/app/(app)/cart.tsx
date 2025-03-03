@@ -1,8 +1,10 @@
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { BlueBlurBg } from '@/components/blue-blur-bg';
 import { CartCard } from '@/components/cart-card';
 import { Button, Text } from '@/components/ui';
 import { useCartStore } from '@/lib/hooks/use-cart';
@@ -20,9 +22,17 @@ export default function Cart() {
 
   if (store.cart.length === 0) {
     return (
-      <View>
-        <Text>Your cart is empty</Text>
-      </View>
+      <BlueBlurBg>
+        <View className="mx-4 mt-32 flex-1 items-center justify-start">
+          <MaterialIcons name="shopping-cart" size={90} color="lightgray" />
+          <Text className="mt-10 text-3xl font-bold">Nenhum item</Text>
+          <Text className="my-8 text-lg">
+            Oh não! Seu carrinho está vazio. Preencha-o com brindes para
+            concluir sua compra.
+          </Text>
+          <Button label="Go Shopping" onPress={() => router.push('/')} />
+        </View>
+      </BlueBlurBg>
     );
   }
 
