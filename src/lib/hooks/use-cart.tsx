@@ -5,18 +5,23 @@ import { type Product } from '@/api/products';
 type CartItem = {
   product: Product;
   quantity: number;
+  cartID?: number;
 };
 
 type CartStore = {
+  orderID: number | null;
+  setOrderID: (id: number) => void;
   cart: CartItem[];
   cartTotal: () => number;
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: Product, quantity: number, cartId?: number) => void;
   removeFromCart: (productId: number) => void;
   updateCartItemQuantity: (productId: number, newQuantity: number) => void;
   clearCart: () => void;
 };
 
 const useCartStore = create<CartStore>((set, get) => ({
+  orderID: null,
+  setOrderID: (id) => set({ orderID: id }),
   cart: [],
   cartTotal: () => {
     const { cart } = get();
@@ -57,7 +62,7 @@ const useCartStore = create<CartStore>((set, get) => ({
     }));
   },
   clearCart: () => {
-    set({ cart: [] });
+    set({ cart: [], orderID: null });
   },
 }));
 
