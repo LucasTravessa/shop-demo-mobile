@@ -12,7 +12,7 @@ type Props = {
 };
 
 function ColorCircle({ color }: { color: string }) {
-  return <View className={'size-7 rounded-full' + ` bg-${color}`} />;
+  return <View className={'size-7 rounded-full ' + ` bg-${color}`} />;
 }
 
 export default function ColorPicker({ selectedColor }: Props) {
