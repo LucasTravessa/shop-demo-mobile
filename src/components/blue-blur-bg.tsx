@@ -24,11 +24,13 @@ const BlueBlurBg: React.FC<BlueBlurBgProps> = ({
   className,
   ...props
 }) => {
+  const MemoizedBlueBlurSVG = React.memo(BlueBlurSVG);
+
   return (
     <View className="absolute inset-0" {...props}>
       {/* Blue Light Source */}
       <View className="absolute inset-0">
-        <BlueBlurSVG />
+        <MemoizedBlueBlurSVG />
       </View>
 
       {/* Blurred Overlay */}
