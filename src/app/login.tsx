@@ -11,7 +11,7 @@ export default function Login() {
   const router = useRouter();
   const signIn = useAuth.use.signIn();
 
-  const { mutateAsync: login } = useLogin();
+  const { mutateAsync: login, isPending } = useLogin();
 
   const onSubmit: LoginFormProps['onSubmit'] = async (data) => {
     console.log(data);
@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <>
       <FocusAwareStatusBar />
-      <LoginForm onSubmit={onSubmit} />
+      <LoginForm onSubmit={onSubmit} loading={isPending} />
     </>
   );
 }
