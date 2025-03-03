@@ -48,7 +48,6 @@ export default function RootLayout() {
       >
         <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="login" />
-        <Stack.Screen name="checkout" />
       </Stack>
     </Providers>
   );
