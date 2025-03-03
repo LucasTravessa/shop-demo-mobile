@@ -24,10 +24,10 @@ export default function Review() {
   };
 
   return (
-    <View className="flex-1 bg-white p-6">
+    <ScrollView className="flex-1 bg-white p-6">
       <Text className="mb-4 text-2xl font-bold">Checkout</Text>
-      <Text className="mb-4 text-lg font-light">Revise seu pedido</Text>
-      <ScrollView className="flex-1">
+      <Text className="text-xl font-bold">Revise seu pedido</Text>
+      <View className="my-6 gap-4">
         {cart.map((item, index) => (
           <CartCard
             key={index}
@@ -35,28 +35,29 @@ export default function Review() {
             quantity={item.quantity}
           />
         ))}
-      </ScrollView>
-      <Text className="mb-4 text-lg font-light">Endereço de entrega</Text>
+      </View>
+      <Text className="mb-4 text-xl font-bold">Endereço de entrega</Text>
       {shipping && (
         <View className="mb-4">
-          <Text className="text-lg font-semibold">{shipping.fullName}</Text>
-          <Text className="text-lg">{shipping.address1}</Text>
-          {shipping.address2 && (
-            <Text className="text-lg">{shipping.address2}</Text>
-          )}
-          <Text className="text-lg">{shipping.city}</Text>
-          <Text className="text-lg">{shipping.state}</Text>
+          <Text className="text-lg">{shipping.fullName}</Text>
+          <Text className="text-lg">
+            {shipping.address1}
+            {shipping.address2 && `, ${shipping.address2}`}
+          </Text>
+          <Text className="text-lg">
+            {shipping.city}, {shipping.state}
+          </Text>
           <Text className="text-lg">{shipping.zipCode}</Text>
         </View>
       )}
-      <Text className="mb-4 text-lg font-light">Método de pagamento</Text>
-      <View className="flex flex-row justify-between">
+      <Text className="mb-4 text-lg font-bold">Método de pagamento</Text>
+      <View className="mb-8 flex flex-row justify-between">
         <Text className="text-xl font-semibold">
           Total: <Text className="text-lg ">{cart.length} itens</Text>{' '}
         </Text>
         <Text className="text-xl font-bold">R$ {total.toFixed(2)}</Text>
       </View>
       <Button label="Fazer Pedido" onPress={onSubmit} />
-    </View>
+    </ScrollView>
   );
 }
