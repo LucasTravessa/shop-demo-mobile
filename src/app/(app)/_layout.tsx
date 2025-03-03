@@ -101,6 +101,17 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="about"
+        options={{
+          href: null,
+          headerLeft: () => (
+            <Pressable className="ml-4" onPress={() => router.back()}>
+              <ArrowLeft />
+            </Pressable>
+          ),
+        }}
+      />
     </Tabs>
   );
 }
