@@ -4,7 +4,7 @@ import * as React from 'react';
 import { type Control, useForm } from 'react-hook-form';
 import { showMessage } from 'react-native-flash-message';
 
-import { Button, ControlledInput, ScrollView, Text } from '@/components/ui';
+import { Button, ControlledInput, Text, View } from '@/components/ui';
 import { useCheckoutStore } from '@/lib/hooks/use-checkout';
 import {
   checkout_shipping_schema,
@@ -30,12 +30,10 @@ export default function Shipping() {
   };
 
   return (
-    <>
-      <ScrollView className="flex-1 bg-white p-6">
-        <Text className="mb-4 text-2xl font-bold">Checkout</Text>
-        <ShippingForm control={control} handleSubmit={handleSubmit(onSubmit)} />
-      </ScrollView>
-    </>
+    <View className="flex-1 bg-white p-6">
+      <Text className="mb-4 text-2xl font-bold">Checkout</Text>
+      <ShippingForm control={control} handleSubmit={handleSubmit(onSubmit)} />
+    </View>
   );
 }
 
@@ -48,61 +46,71 @@ function ShippingForm({
 }) {
   return (
     <>
-      <Text className="mb-4 text-2xl font-bold">Enter a shipping address</Text>
+      <Text className="mb-4 text-xl font-bold">Enter a shipping address</Text>
       <ControlledInput
         name="fullName"
-        label="Full Name"
+        label="FULL NAME*"
         control={control}
         testID="full-name"
-        className="mb-4"
       />
       <ControlledInput
         name="address1"
-        label="Address Line 1"
+        label="ADDRESS LINE 1*"
         control={control}
         testID="address-line-1"
-        className="mb-4"
       />
       <ControlledInput
         name="address2"
-        label="Address Line 2"
+        label="ADDRESS LINE 2"
         control={control}
         testID="address-line-2"
-        className="mb-4"
       />
-      <ControlledInput
-        name="city"
-        label="City"
-        control={control}
-        testID="city"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="state"
-        label="State / Region"
-        control={control}
-        testID="state"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="zipCode"
-        label="ZIP Code"
-        control={control}
-        testID="zip-code"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="country"
-        label="Country"
-        control={control}
-        testID="country"
-        className="mb-6"
-      />
-      <Button
-        label="Continue"
-        onPress={handleSubmit}
-        testID="continue-button"
-      />
+
+      <View className="flex flex-row justify-between">
+        <View className="w-[48%]">
+          <ControlledInput
+            name="city"
+            label="CITY*"
+            control={control}
+            testID="city"
+          />
+        </View>
+        <View className="w-[48%]">
+          <ControlledInput
+            name="state"
+            label="STATE / REGION"
+            control={control}
+            testID="state"
+          />
+        </View>
+      </View>
+
+      <View className="flex flex-row justify-between">
+        <View className="w-[48%]">
+          <ControlledInput
+            name="zipCode"
+            label="ZIP CODE*"
+            control={control}
+            testID="zip-code"
+          />
+        </View>
+        <View className="w-[48%]">
+          <ControlledInput
+            name="country"
+            label="COUNTRY*"
+            control={control}
+            testID="country"
+          />
+        </View>
+      </View>
+
+      <View className="mt-6">
+        <Button
+          label="Continuar"
+          onPress={handleSubmit}
+          testID="continue-button"
+        />
+      </View>
     </>
   );
 }
