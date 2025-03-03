@@ -8,15 +8,17 @@ import { useCartStore } from '@/lib/hooks/use-cart';
 import { useCheckoutStore } from '@/lib/hooks/use-checkout';
 
 export default function Review() {
-  const { shipping } = useCheckoutStore();
-  const { cart, cartTotal } = useCartStore();
+  const { shipping, clearCheckout } = useCheckoutStore();
+  const { cart, cartTotal, clearCart } = useCartStore();
 
   const total = React.useMemo(() => cartTotal(), [cartTotal]);
 
   const onSubmit = () => {
     router.push('/checkout/complete');
+    clearCart();
+    clearCheckout();
     showMessage({
-      message: 'Shipping address saved successfully',
+      message: 'Pedido realizado com sucesso',
       type: 'success',
     });
   };
