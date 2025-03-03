@@ -28,8 +28,8 @@ export function GradientCheckmarkCircle({ ...props }: SvgProps) {
           y2="12"
           gradientUnits="userSpaceOnUse"
         >
-          <Stop stop-color="#28CE9C" />
-          <Stop offset="1" stop-color="#6AC9FF" />
+          <Stop stopColor="#28CE9C" />
+          <Stop offset="1" stopColor="#6AC9FF" />
         </LinearGradient>
         <LinearGradient
           id="paint1_linear_40_2423"
@@ -39,8 +39,8 @@ export function GradientCheckmarkCircle({ ...props }: SvgProps) {
           y2="12"
           gradientUnits="userSpaceOnUse"
         >
-          <Stop stop-color="#28CE9C" />
-          <Stop offset="1" stop-color="#6AC9FF" />
+          <Stop stopColor="#28CE9C" />
+          <Stop offset="1" stopColor="#6AC9FF" />
         </LinearGradient>
       </Defs>
     </Svg>
