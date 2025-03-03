@@ -8,7 +8,7 @@ import { tv } from 'tailwind-variants';
 const button = tv({
   slots: {
     container:
-      'my-2 flex flex-row items-center justify-center rounded-full px-4',
+      'flex flex-row items-center justify-center rounded-full px-4 py-2',
     label: 'font-inter text-base font-semibold',
     indicator: 'h-6 text-white',
   },
@@ -119,7 +119,7 @@ export const Button = React.forwardRef<View, Props>(
         colors={['#6AC9FF', '#28CE9C']}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
-        style={{ borderRadius: 999 }}
+        style={{ borderRadius: 999, paddingVertical: 2 }}
       >
         <Pressable
           disabled={disabled || loading}
