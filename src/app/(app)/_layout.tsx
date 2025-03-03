@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Redirect, SplashScreen, Tabs } from 'expo-router';
+import { Redirect, router, SplashScreen, Tabs } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
+import { Pressable } from 'react-native';
 
 import { IconBadge } from '@/components/ui/icon-badge';
+import ArrowLeft from '@/components/ui/icons/arrow-left';
 import { Cart } from '@/components/ui/icons/cart';
 import { Catalog } from '@/components/ui/icons/catalog';
 import Menu from '@/components/ui/icons/menu';
@@ -29,7 +31,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerTitle: 'My demo app',
         tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: '#000',
       }}
@@ -48,7 +50,6 @@ export default function TabLayout() {
         name="cart"
         options={{
           title: 'Carrinho',
-          headerShown: false,
           tabBarIcon: ({}) =>
             items > 0 ? <IconBadge icon={<Cart />} count={items} /> : <Cart />,
           tabBarButtonTestID: 'cart-tab',
@@ -59,9 +60,20 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Menu',
-          headerShown: false,
           tabBarIcon: ({}) => <Menu />,
           tabBarButtonTestID: 'settings-tab',
+        }}
+      />
+
+      <Tabs.Screen
+        name="details/[id]"
+        options={{
+          href: null,
+          headerLeft: () => (
+            <Pressable className="ml-4" onPress={() => router.back()}>
+              <ArrowLeft />
+            </Pressable>
+          ),
         }}
       />
     </Tabs>

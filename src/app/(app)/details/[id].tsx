@@ -1,4 +1,4 @@
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import * as React from 'react';
 
 import { useProduct } from '@/api/products';
@@ -37,7 +37,6 @@ export default function Details() {
   if (isPending) {
     return (
       <View className="flex-1 justify-center  p-3">
-        <Stack.Screen />
         <FocusAwareStatusBar />
         <ActivityIndicator />
       </View>
@@ -46,7 +45,6 @@ export default function Details() {
   if (isError) {
     return (
       <View className="flex-1 justify-center p-3">
-        <Stack.Screen />
         <FocusAwareStatusBar />
         <Text className="text-center">Error loading the Product</Text>
       </View>
