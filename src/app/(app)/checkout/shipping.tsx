@@ -1,44 +1,28 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { router } from 'expo-router';
 import * as React from 'react';
 import { type Control, useForm } from 'react-hook-form';
 import { showMessage } from 'react-native-flash-message';
-import { z } from 'zod';
 
 import { Button, ControlledInput, ScrollView, Text } from '@/components/ui';
-
-const schema = z.object({
-  fullName: z.string().min(2, 'Full Name is required'),
-  address1: z.string().min(5, 'Address Line 1 is required'),
-  address2: z.string().optional(),
-  city: z.string().min(2, 'City is required'),
-  state: z.string().min(2, 'State/Region is required'),
-  zipCode: z.string().min(4, 'ZIP Code is required'),
-  country: z.string().min(2, 'Country is required'),
-
-  // Novos campos para pagamento
-  fullNameOnCard: z.string().min(2, 'Full Name on Card is required'),
-  cardNumber: z.string().regex(/^\d{16}$/, 'Card Number must be 16 digits'),
-  expirationDate: z
-    .string()
-    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Expiration date must be MM/YY'),
-  securityCode: z.string().regex(/^\d{3}$/, 'Security Code must be 3 digits'),
-});
-
-type FormType = z.infer<typeof schema>;
+import { useCheckoutStore } from '@/lib/hooks/use-checkout';
+import {
+  checkout_shipping_schema,
+  type ShippingFormType,
+} from '@/types/checkout';
 
 export default function Shipping() {
-  const [step, setStep] = React.useState<number>(1);
+  const store = useCheckoutStore();
 
-  const onContinue = () => {
-    setStep(step + 1);
-  };
-
-  const { control, handleSubmit } = useForm<FormType>({
-    resolver: zodResolver(schema),
+  const { control, handleSubmit } = useForm<ShippingFormType>({
+    resolver: zodResolver(checkout_shipping_schema),
+    defaultValues: store.shipping ?? undefined,
   });
 
-  const onSubmit = (data: FormType) => {
+  const onSubmit = (data: ShippingFormType) => {
     console.log(data);
+    store.setShipping(data);
+    router.push('/checkout/payment');
     showMessage({
       message: 'Shipping address saved successfully',
       type: 'success',
@@ -48,21 +32,19 @@ export default function Shipping() {
   return (
     <>
       <ScrollView className="flex-1 bg-white p-6">
-        {step === 1 && <Step1 control={control} onContinue={onContinue} />}
-        {step === 2 && (
-          <Step2 control={control} handleSubmit={handleSubmit(onSubmit)} />
-        )}
+        <Text className="mb-4 text-2xl font-bold">Checkout</Text>
+        <ShippingForm control={control} handleSubmit={handleSubmit(onSubmit)} />
       </ScrollView>
     </>
   );
 }
 
-function Step1({
+function ShippingForm({
   control,
-  onContinue,
+  handleSubmit,
 }: {
-  control: Control<FormType>;
-  onContinue: () => void;
+  control: Control<ShippingFormType>;
+  handleSubmit: () => void;
 }) {
   return (
     <>
@@ -116,56 +98,10 @@ function Step1({
         testID="country"
         className="mb-6"
       />
-      <Button label="Continue" onPress={onContinue} testID="continue-button" />
-    </>
-  );
-}
-
-function Step2({
-  control,
-  handleSubmit,
-}: {
-  control: Control<FormType>;
-  handleSubmit: any;
-}) {
-  return (
-    <>
-      <Text className="mb-4 text-2xl font-bold">Enter a payment method</Text>
-      <ControlledInput
-        name="fullNameOnCard"
-        label="Full Name on Card"
-        control={control}
-        testID="full-name-on-card"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="cardNumber"
-        label="Card Number"
-        control={control}
-        testID="card-number"
-        keyboardType="numeric"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="expirationDate"
-        label="Expiration Date (MM/YY)"
-        control={control}
-        testID="expiration-date"
-        keyboardType="numeric"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="securityCode"
-        label="Security Code (CVV)"
-        control={control}
-        testID="security-code"
-        keyboardType="numeric"
-        className="mb-6"
-      />
       <Button
-        label="COMPRAR AGORA"
+        label="Continue"
         onPress={handleSubmit}
-        testID="confirm-payment-button"
+        testID="continue-button"
       />
     </>
   );

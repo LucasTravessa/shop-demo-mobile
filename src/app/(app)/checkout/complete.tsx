@@ -11,12 +11,12 @@ export default function Complete() {
     <BlueBlurBg>
       <View className="mx-4 mt-32 flex-1 items-center justify-start">
         <MaterialIcons name="shopping-cart" size={90} color="lightgray" />
-        <Text className="mt-10 text-3xl font-bold">Nenhum item</Text>
-        <Text className="my-8 text-lg">
-          Oh não! Seu carrinho está vazio. Preencha-o com brindes para concluir
-          sua compra.
+        <Text className="mt-10 text-3xl font-bold">Checkout completado</Text>
+        <Text className="my-8 text-center text-lg">
+          Obrigado pelo seu pedido. Seu pedido foi despachado e chegará tão
+          rápido quanto o pônei galopa!
         </Text>
-        <Button label="Go Shopping" onPress={() => router.push('/')} />
+        <Button label="Continue Comprando" onPress={() => router.push('/')} />
       </View>
     </BlueBlurBg>
   );

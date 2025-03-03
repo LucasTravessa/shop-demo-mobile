@@ -7,6 +7,7 @@ export default function CheckoutLayout() {
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName="shipping"
     >
       <Stack.Screen name="shipping" />
       <Stack.Screen name="payment" />
