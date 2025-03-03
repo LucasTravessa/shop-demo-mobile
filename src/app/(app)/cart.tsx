@@ -12,13 +12,7 @@ import { useCartStore } from '@/lib/hooks/use-cart';
 export default function Cart() {
   const router = useRouter();
   const store = useCartStore();
-  const total = useMemo(() => {
-    if (store.cart.length === 0) return 0;
-    return store.cart.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
-      0
-    );
-  }, [store.cart]);
+  const total = useMemo(() => store.cartTotal(), [store]);
 
   if (store.cart.length === 0) {
     return (

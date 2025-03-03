@@ -9,14 +9,23 @@ type CartItem = {
 
 type CartStore = {
   cart: CartItem[];
+  cartTotal: () => number;
   addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: number) => void;
   updateCartItemQuantity: (productId: number, newQuantity: number) => void;
   clearCart: () => void;
 };
 
-const useCartStore = create<CartStore>((set) => ({
+const useCartStore = create<CartStore>((set, get) => ({
   cart: [],
+  cartTotal: () => {
+    const { cart } = get();
+    if (cart.length === 0) return 0;
+    return cart.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    );
+  },
   addToCart: (product, quantity) => {
     set((state) => {
       if (!state.cart.some((item) => item.product.id === product.id)) {
