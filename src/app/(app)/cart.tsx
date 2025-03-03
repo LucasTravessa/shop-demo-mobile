@@ -1,16 +1,13 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useMemo } from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 import { BlueBlurBg } from '@/components/blue-blur-bg';
 import { CartCard } from '@/components/cart-card';
-import { Button, Text } from '@/components/ui';
+import { Button, ScrollView, Text, View } from '@/components/ui';
 import { useCartStore } from '@/lib/hooks/use-cart';
 
 export default function Cart() {
-  const router = useRouter();
   const store = useCartStore();
   const total = useMemo(() => store.cartTotal(), [store]);
 
@@ -31,7 +28,7 @@ export default function Cart() {
   }
 
   const handleCheckout = () => {
-    router.push('/checkout');
+    router.push('/checkout/shipping');
   };
 
   return (
