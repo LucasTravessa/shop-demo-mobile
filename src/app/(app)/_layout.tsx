@@ -7,9 +7,16 @@ import { IconBadge } from '@/components/ui/icon-badge';
 import ArrowLeft from '@/components/ui/icons/arrow-left';
 import { Cart } from '@/components/ui/icons/cart';
 import { Catalog } from '@/components/ui/icons/catalog';
+import { GradientCart } from '@/components/ui/icons/gradient-cart';
+import { GradientCatalog } from '@/components/ui/icons/gradient-catalog';
 import Menu from '@/components/ui/icons/menu';
 import { useAuth } from '@/lib';
 import { useCartStore } from '@/lib/hooks/use-cart';
+
+function WichCart({ focused }: { focused: boolean }) {
+  if (focused) return <GradientCart />;
+  return <Cart />;
+}
 
 export default function TabLayout() {
   const items = useCartStore().cart.length;
@@ -28,6 +35,7 @@ export default function TabLayout() {
   if (status === 'signOut') {
     return <Redirect href="/login" />;
   }
+
   return (
     <Tabs
       screenOptions={{
@@ -40,7 +48,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Catalogo',
-          tabBarIcon: ({}) => <Catalog />,
+          tabBarIcon: ({ focused }) =>
+            focused ? <GradientCatalog /> : <Catalog />,
           // headerRight: () => <CreateNewPostLink />,
           tabBarButtonTestID: 'catalog-tab',
         }}
@@ -50,8 +59,12 @@ export default function TabLayout() {
         name="cart"
         options={{
           title: 'Carrinho',
-          tabBarIcon: ({}) =>
-            items > 0 ? <IconBadge icon={<Cart />} count={items} /> : <Cart />,
+          tabBarIcon: ({ focused }) =>
+            items > 0 ? (
+              <IconBadge icon={<WichCart focused={focused} />} count={items} />
+            ) : (
+              <WichCart focused={focused} />
+            ),
           tabBarButtonTestID: 'cart-tab',
         }}
       />
@@ -60,7 +73,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Menu',
-          tabBarIcon: ({}) => <Menu />,
+          tabBarIcon: () => <Menu />,
           tabBarButtonTestID: 'settings-tab',
         }}
       />
