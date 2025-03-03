@@ -1,3 +1,4 @@
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import * as React from 'react';
@@ -6,12 +7,12 @@ import { showMessage } from 'react-native-flash-message';
 
 import {
   Button,
+  Checkbox,
   ControlledInput,
   ScrollView,
   Text,
   View,
 } from '@/components/ui';
-import { Github } from '@/components/ui/icons';
 import { useCheckoutStore } from '@/lib/hooks/use-checkout';
 import {
   checkout_payment_schema,
@@ -56,50 +57,72 @@ function PaymentForm({
   return (
     <>
       <Text className="mb-4 text-2xl font-bold">Enter a payment method</Text>
-      <Text className="mb-4 text-lg font-light">
+      <Text className="mb-2 text-lg font-light">
         You will not be charged until you review your purchase on the next
         screen.
       </Text>
-      <View className="flex flex-row">
+      <View className="my-4 flex flex-row items-center justify-between">
         <Text className="text-lg font-medium">Card</Text>
-        <Github />
+        <MaterialIcons name="credit-card" size={24} color="lightgray" />
       </View>
       <ControlledInput
         name="fullNameOnCard"
-        label="Full Name on Card"
+        label="FULL NAME ON CARD*"
         control={control}
         testID="full-name-on-card"
-        className="mb-4"
       />
       <ControlledInput
         name="cardNumber"
-        label="Card Number"
+        label="CARD NUMBER*"
         control={control}
         testID="card-number"
         keyboardType="numeric"
-        className="mb-4"
       />
-      <ControlledInput
-        name="expirationDate"
-        label="Expiration Date (MM/YY)"
-        control={control}
-        testID="expiration-date"
-        keyboardType="numeric"
-        className="mb-4"
-      />
-      <ControlledInput
-        name="securityCode"
-        label="Security Code (CVV)"
-        control={control}
-        testID="security-code"
-        keyboardType="numeric"
-        className="mb-6"
-      />
-      <Button
-        label="COMPRAR AGORA"
-        onPress={handleSubmit}
-        testID="confirm-payment-button"
-      />
+      <View className="mb-4 flex flex-row justify-between">
+        <View className="w-[48%]">
+          <ControlledInput
+            name="expirationDate"
+            label="EXPIRATION DATE*"
+            control={control}
+            testID="expiration-date"
+            keyboardType="numeric"
+          />
+        </View>
+        <View className="w-[48%]">
+          <ControlledInput
+            name="securityCode"
+            label="SECURITY CODE*"
+            control={control}
+            testID="security-code"
+            keyboardType="numeric"
+          />
+        </View>
+      </View>
+
+      <CheckboxAddress />
+
+      <View className="mt-4">
+        <Button
+          label="COMPRAR AGORA"
+          onPress={handleSubmit}
+          testID="confirm-payment-button"
+        />
+      </View>
     </>
   );
 }
+
+const CheckboxAddress = () => {
+  const [checked, setChecked] = React.useState(false);
+  return (
+    <Checkbox.Root
+      checked={checked}
+      onChange={setChecked}
+      accessibilityLabel="accept terms of condition"
+      className="pb-2"
+    >
+      <Checkbox.Icon checked={checked} />
+      <Checkbox.Label text="Meu endereço de cobrança é igual ao meu endereço de entrega" />
+    </Checkbox.Root>
+  );
+};
