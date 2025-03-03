@@ -9,7 +9,7 @@ import {
   type SvgProps,
 } from 'react-native-svg';
 
-export default function Cart({ color = '#000', ...props }: SvgProps) {
+export function Cart({ color = '#000', ...props }: SvgProps) {
   return (
     <Svg width="24" height="25" viewBox="0 0 24 25" fill="none" {...props}>
       <G clipPath="url(#clip0_32_1099)">

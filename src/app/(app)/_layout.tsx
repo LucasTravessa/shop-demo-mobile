@@ -3,8 +3,8 @@ import { Redirect, SplashScreen, Tabs } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
 
 import { IconBadge } from '@/components/ui/icon-badge';
-import Cart from '@/components/ui/icons/cart';
-import Catalog from '@/components/ui/icons/catalog';
+import { Cart } from '@/components/ui/icons/cart';
+import { Catalog } from '@/components/ui/icons/catalog';
 import Menu from '@/components/ui/icons/menu';
 import { useAuth } from '@/lib';
 import { useCartStore } from '@/lib/hooks/use-cart';

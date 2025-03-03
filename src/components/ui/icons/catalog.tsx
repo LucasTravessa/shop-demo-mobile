@@ -1,7 +1,7 @@
 import React from 'react';
 import { Path, Svg, type SvgProps } from 'react-native-svg';
 
-export default function Catalog({ color = '#000', ...props }: SvgProps) {
+export function Catalog({ color = '#000', ...props }: SvgProps) {
   return (
     <Svg width="18" height="16" viewBox="0 0 18 16" fill="none" {...props}>
       <Path
