@@ -63,7 +63,7 @@ export default function Settings() {
                 onPress={() => openLinkInBrowser(apiDocsUrl)}
               />
               <Item text="Report A Bug" onPress={() => {}} />
-              <Item text="About" onPress={() => {}} />
+              <Item text="About" onPress={() => router.push('/about')} />
             </ItemsContainer>
           </ItemsContainer>
         </View>
