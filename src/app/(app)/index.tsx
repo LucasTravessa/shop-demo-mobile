@@ -30,7 +30,7 @@ export default function Feed() {
   if (isError) {
     return (
       <View>
-        <Text> Error Loading data </Text>
+        <EmptyList isLoading={false} />
       </View>
     );
   }
